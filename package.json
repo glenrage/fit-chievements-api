@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "start": "nodemon ./server/app.js",
+    "start": "node ./server/app.js",
     "test": "mocha"
   },
   "repository": {
