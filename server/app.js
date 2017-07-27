@@ -51,7 +51,7 @@ app.use(require('./routes'));
 
 //allow CORS requests
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://<YOUR-APP-NAME>.herokuapp.com");
+  res.header("Access-Control-Allow-Origin", "http://fitchievements-api.herokuapp.com");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
