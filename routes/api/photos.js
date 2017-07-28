@@ -1,16 +1,15 @@
 'use strict'
 
 const router = require('express').Router()
-const fs = require('fs')
-const path = require('path')
-const del = require('del')
-const AWS = require('aws-sdk')
+const createError = require('http-errors');
 const multer = require('multer')
-const createError = require('http-errors')
+const fs = require('fs');
+const del = require('del');
+const path = require('path');
+const auth = require('../auth');
+const AWS = require('aws-sdk');
 const Photo = require('../../models/Photo.js')
 const User = require('../../models/User.js')
-const Achievement = require('../../models/Achievement');
-const auth = require('../auth');
 
 // Use bluebird implementation of Promise
 // will add a .promise() to AWS.Request
@@ -18,15 +17,14 @@ AWS.config.setPromisesDependency(require('bluebird'))
 
 // module constants
 const s3 = new AWS.S3()
-const dataDir =`${__dirname}../../data`
+const dataDir =`${__dirname}/../../data`
 const upload = multer({dest: dataDir })
 const s3UploadPromise = require('../../config/s3-upload-promise.js')
 
-router.post('/:achievement/photo', auth.required, upload.single('file'), function(req, res, next){
-  if (!req.file) return createError(400, 'Resource required');
-    if (!req.file.path) return createError(500, 'File not saved');
+router.post('/photo/', upload.single('file'), function(req, res, next){
 
-    let tempPhoto, tempUser;
+  // if (!req.file) return createError(400, 'Resource required');
+  //   if (!req.file.path) return createError(500, 'File not saved');
     let ext = path.extname(req.file.originalname);
     let params = {
       ACL: 'public-read',
@@ -35,26 +33,23 @@ router.post('/:achievement/photo', auth.required, upload.single('file'), functio
       Body: fs.createReadStream(req.file.path),
     };
 
-    return User.findById(req.user._id)
-    .then(user => {
-      tempUser = user;
-      return s3UploadPromise(params);
-    })
+    // return User.findById(req.payload.id)
+    return s3UploadPromise(params)
     .then(s3Data => {
       del([`${dataDir}/*`]);
       let photoData = {
-        userId: req.user._id,
+        // userId: req.payload.id,
         imageURI: s3Data.Location,
         objectKey: s3Data.Key,
       };
       return new Photo(photoData).save();
     })
-    .then(photo => {
-      tempPhoto = photo;
-      tempUser.photos.push(photo._id);
-      return User.findByIdAndUpdate(req.user._id, tempUser, {new: true});
-    })
-    .then(() => res.json(tempPhoto))
+    // .then(photo => {
+    //   tempPhoto = photo;
+    //   tempUser.photos.push(photo._id);
+    //   return User.findByIdAndUpdate(req.user._id, tempUser, {new: true});
+    // })
+    .then((photo) => res.json(photo))
     .catch(err => res.send(err));
 })
 //

@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const CommentSchema = new mongoose.Schema({
   body: String,
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  achievement: { type: mongoose.Schema.Types.ObjectId, ref: 'achievement' }
+  achievement: { type: mongoose.Schema.Types.ObjectId, ref: 'Achievement' }
 }, {timestamps: true});
 
 //Requires population of author

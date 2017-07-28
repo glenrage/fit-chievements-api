@@ -1,6 +1,5 @@
 'use strict';
 
-
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 const slug = require('slug');
@@ -15,7 +14,7 @@ const AchievementSchema = new mongoose.Schema({
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
   tagList: [{ type: String }],
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  photo: { type: mongoose.Schema.Types.ObjectId, ref: 'Photo' }
+  
 }, {timestamps: true});
 
 AchievementSchema.plugin(uniqueValidator, {message: 'is already taken'});

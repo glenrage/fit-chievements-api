@@ -1,5 +1,6 @@
 'use strict';
 
+require('dotenv').load();
 const http = require('http'),
       path = require('path'),
       methods = require('methods'),
@@ -50,11 +51,11 @@ require('./config/passport');
 app.use(require('./routes'));
 
 //allow CORS requests
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://fitchievements-api.herokuapp.com");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "http://fitchievements-api.herokuapp.com");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
