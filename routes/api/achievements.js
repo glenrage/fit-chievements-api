@@ -171,6 +171,10 @@ router.put('/:achievement', auth.required, function(req, res, next) {
         req.achievement.tagList = req.body.achievement.tagList
       }
 
+      if(typeof req.body.achievement.photo !== 'undefined'){
+        req.achievement.photo = req.body.achievement.photo
+      }
+
       req.achievement.save().then(function(achievement){
         return res.json({achievement: achievement.toJSONFor(user)});
       }).catch(next);

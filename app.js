@@ -10,7 +10,11 @@ const http = require('http'),
       cors = require('cors'),
       passport = require('passport'),
       errorhandler = require('errorhandler'),
-      mongoose = require('mongoose');
+      mongoose = require('mongoose'),
+      multer = require('multer');
+
+var multipart=require('connect-multiparty');
+var methodOverride = require('method-override')
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -23,9 +27,13 @@ app.use(cors());
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(methodOverride());
+app.use(multipart());
 
 app.use(require('method-override')());
 app.use(express.static(__dirname + '/public'));
+
+app.use(multer({dest:'./public/upload/temp'}).single('file'));
 
 app.use(session({ secret: 'fit-chievements', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
 
