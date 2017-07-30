@@ -11,8 +11,11 @@ const UserSchema = new mongoose.Schema({
   image: String,
   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Achievement' }],
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  followers: {type: Number, default: 0},
+  followingUsers: {type: Number, default: 0},
   hash: String,
-  salt: String
+  salt: String,
+  photo: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Photo' }],
 }, {timestamps: true});
 
 UserSchema.plugin(uniqueValidator, {message: 'is already taken.'});
@@ -53,8 +56,10 @@ UserSchema.methods.toProfileJSONFor = function(user){
   return {
     username: this.username,
     bio: this.bio,
-    image: this.image || 'https://static.productionready.io/images/smiley-cyrus.jpg',
-    following: user ? user.isFollowing(this._id) : false
+    image: this.image || 'http://res.cloudinary.com/glenrage/image/upload/v1501355227/pepesmile_ja5wi1.jpg',
+    following: user ? user.isFollowing(this._id) : false,
+    followers: this.followers,
+    followingUsers: this.followingUsers
   };
 };
 
@@ -80,13 +85,25 @@ UserSchema.methods.isLike = function(id){
 UserSchema.methods.follow = function(id){
   if(this.following.indexOf(id) === -1){
     this.following.push(id);
+    this.followingUsers += 1
   }
 
   return this.save();
 };
 
+UserSchema.methods.addFollowersCount = function(id) {
+  this.followers += 1
+  return this.save();
+}
+
+UserSchema.methods.minusFollowersCount = function(id) {
+  this.followers -= 1
+  return this.save();
+}
+
 UserSchema.methods.unfollow = function(id){
   this.following.remove(id);
+  this.followingUsers -= 1
   return this.save();
 };
 
