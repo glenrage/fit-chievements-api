@@ -28,8 +28,6 @@ router.get('/:username', auth.optional, function(req, res, next){
 
 router.post('/:username/follow', auth.required, function(req, res, next){
   var profileId = req.profile._id;
-  console.log('profile id ' + req.profile._id)
-  console.log('payload id ' + req.payload.id)
 
   User.findById(profileId).then(function(user) {
     if (!user) { return res.sendStatus(401); }

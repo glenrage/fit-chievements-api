@@ -7,6 +7,7 @@ const Achievement = mongoose.model('Achievement');
 //return a list of tags
 router.get('/', function(req, res, next) {
   Achievement.find().distinct('tagList').then(function(tags){
+    console.log('tags - ' + tags)
     return res.json({tags: tags});
   }).catch(next);
 });
