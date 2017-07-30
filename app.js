@@ -16,7 +16,7 @@ const http = require('http'),
 var multipart=require('connect-multiparty');
 var methodOverride = require('method-override')
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'PRODUCTION';
 
 // Create global app object
 const app = express();
