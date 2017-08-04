@@ -3,7 +3,7 @@
 This is the API that serves the Client Side Fit-chievements application.
 
 ## Database Relationship Model
-
+Mind map coming soon...
 
 ### Installing
 
@@ -30,7 +30,7 @@ npm run test
 
 ```
 ## Sample JSON output
-
+Coming soon...
 
 ## Authentication
 The server uses JSON web tokens to authenticate through the Passport library.
