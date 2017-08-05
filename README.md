@@ -1,5 +1,12 @@
 # Fit-chievements-API
 
+[![Build Status](https://travis-ci.org/glenrage/fit-chievements-api.svg?branch=master)](https://travis-ci.org/glenrage/fit-chievements-api)
+[![Coverage Status](https://coveralls.io/repos/github/glenrage/fit-chievements-api/badge.svg?branch=master)](https://coveralls.io/github/glenrage/fit-chievements-api?branch=master)
+[![dependencies Status](https://david-dm.org/expressjs/express/status.svg)](https://david-dm.org/expressjs/express)
+[![devDependencies Status](https://david-dm.org/expressjs/express/dev-status.svg)](https://david-dm.org/expressjs/express?type=dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
 This is the API that serves the Client Side Fit-chievements application.
 
 ## Database Relationship Model
