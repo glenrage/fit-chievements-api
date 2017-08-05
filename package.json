@@ -19,6 +19,7 @@
   "dependencies": {
     "aws-sdk": "^2.92.0",
     "body-parser": "^1.17.2",
+    "chai": "^4.1.0",
     "connect-multiparty": "^2.0.0",
     "cors": "^2.8.4",
     "debug-log": "^1.0.1",
@@ -35,6 +36,7 @@
     "jsonwebtoken": "^7.4.1",
     "method-override": "^2.3.9",
     "methods": "1.1.2",
+    "mocha": "^3.5.0",
     "mongoose": "^4.11.5",
     "mongoose-unique-validator": "^1.0.5",
     "morgan": "^1.8.2",
@@ -44,6 +46,7 @@
     "path": "^0.12.7",
     "request": "^2.81.0",
     "slug": "0.9.1",
+    "superagent": "^3.5.2",
     "underscore": "1.8.3"
   },
   "devDependencies": {
